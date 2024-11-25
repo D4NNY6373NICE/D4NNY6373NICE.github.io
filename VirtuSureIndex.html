@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>VirtuSure Bank - Secure Banking Made Easy</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+    }
+    header {
+      background: #c6c6c6;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+      position: relative;
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 2rem;
+    }
+    header .logo img {
+      max-height: 80px;
+      width: auto;
+    }
+    nav {
+      position: absolute;
+      right: 2rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(to right, #555, #777);
+      color: white;
+    }
+    .hero h1 {
+      font-size: 3rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+    .btn {
+      background: #979797;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background: #979797;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: #f2f2f2;
+    }
+    .feature {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 2rem;
+      max-width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .feature h3 {
+      margin: 1rem 0;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    footer a {
+      color: #bbb;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        position: static;
+        margin-top: 1rem;
+      }
+      nav a {
+        margin-left: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .features {
+        padding: 2rem 1rem;
+      }
+      .feature {
+        max-width: 100%;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 0.9rem;
+      }
+      .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="https://i.imgur.com/f2QQ9pg.png" alt="VirtuSure Logo">
+      </div>
+      <nav style="text-align: center;">
+        <a href="#features">Features</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>    
+        <div></br></div>
+        <a href="#contact">Sam Jones</a>
+        <i class="fa fa-user" style="font-size:24px"></i>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>Welcome back to VirtuSure Bank</h1>
+    <p>Your trusted partner for secure and innovative banking solutions.</p>
+    <button class="btn" onclick="openAccount()">My Account</button>
+  </div>
+
+  <div class="hero" style="background-image: url('https://i.imgur.com/K72XbK5.jpeg');background-size: cover;height: 5rem;">    
+  </div>
+
+  <section class="features" id="features">
+    <div class="feature">
+      <h3>Secure Banking</h3>
+      <p>Experience peace of mind with our advanced security measures.</p>
+    </div>
+    <div class="feature">
+      <h3>24/7 Support</h3>
+      <p>Our support team is here to assist you at any time, day or night.</p>
+    </div>
+    <div class="feature">
+      <h3>Easy Transfers</h3>
+      <p>Send and receive money seamlessly, wherever you are.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 VirtuSure Bank. All rights reserved. <a href="#contact">Contact us</a></p>
+  </footer>
+
+  <script>
+    function openAccount() {
+      alert('Thank you for choosing VirtuSure! Redirecting to account opening page.');
+      // Here you can redirect to the actual account opening page
+      window.location.href = "account-opening.html";
+    }
+  </script>
+
+<script>
+    (function(n,u){
+    window.CXoneDfo=n,
+    window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},window[n].u=u,
+    e=document.createElement("script"),e.type="module",e.src=u+"?"+Math.round(Date.now()/1e3/3600),
+    document.head.appendChild(e)
+    })('cxone','https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
+ 
+    cxone('init', '1092');
+    cxone('guide', 'init', 'e6c11ac6-db80-40ec-8087-9ffbbeceb14f');
+    cxone('guide','hidePreSurvey');
+	cxone('chat','showSendTranscript');
+	cxone('guide', 'setCustomCss', '[data-selector="PORTAL_TITLE"] {display: none !important;}');
+	cxone('chat','setCustomerName', 'Sam Jones'); 
+
+</script>
+
+</body>
+</html>
