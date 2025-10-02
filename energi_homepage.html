@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENERGI - Power Your Life</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .carousel {
+            margin-top: 70px;
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(6, 95, 70, 0.85) 0%, rgba(16, 185, 129, 0.75) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .carousel-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .carousel-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-button {
+            background: #fbbf24;
+            color: #065f46;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.3);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .carousel-arrow.left {
+            left: 20px;
+        }
+
+        .carousel-arrow.right {
+            right: 20px;
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .feature-card h3 {
+            color: #065f46;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #f0fdf4 0%, #d1fae5 100%);
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item h2 {
+            color: #065f46;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #475569;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 2rem;
+        }
+
+        .testimonial-section h2 {
+            text-align: center;
+            color: #065f46;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+
+        .testimonial-name {
+            font-weight: bold;
+            color: #065f46;
+        }
+
+        .testimonial-location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            color: #444;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        footer p {
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+    (function(n,u){
+    window.CXoneDfo=n,
+    window[n]=window[n]||function(){(window[n].q=window[n].q||[]).push(arguments)},window[n].u=u,
+    e=document.createElement("script"),e.type="module",e.src=u+"?"+Math.round(Date.now()/1e3/3600),
+    document.head.appendChild(e)
+    })('cxone','https://web-modules-de-na1.niceincontact.com/loader/1/loader.js');
+
+    cxone('init', '1092');
+    cxone('guide', 'init', 'b58dfabb-24a5-459b-8990-1cda34d74cf2');
+    cxone('chat','showSendTranscript');
+    cxone('guide','hidePreSurvey');
+	cxone('guide', 'setCustomCss', '[data-selector="PORTAL_TITLE"] {display: none !important;}');
+    cxone('chat','setCustomerName', 'Sam Jones'); 
+
+</script>
+    <header>
+        <nav>
+            <div class="logo">ENERGI</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="carousel">
+        <button class="carousel-arrow left" onclick="changeSlide(-1)">❮</button>
+        <button class="carousel-arrow right" onclick="changeSlide(1)">❯</button>
+
+        <div class="carousel-slide active">
+            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&h=900&fit=crop" alt="Wind turbines">
+            <div class="carousel-overlay">
+                <div class="carousel-content">
+                    <h1>Power Your Life</h1>
+                    <p>Reliable gas and electric for UK homes. Switch to ENERGI today.</p>
+                    <button class="cta-button">Get a Quote</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&h=900&fit=crop" alt="Solar panels">
+            <div class="carousel-overlay">
+                <div class="carousel-content">
+                    <h1>Green Energy Solutions</h1>
+                    <p>Switch to renewable energy and reduce your carbon footprint.</p>
+                    <button class="cta-button">Learn More</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-slide">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&fit=crop" alt="Smart home">
+            <div class="carousel-overlay">
+                <div class="carousel-content">
+                    <h1>Smart Energy Control</h1>
+                    <p>Manage your energy usage with our intuitive app and smart meters.</p>
+                    <button class="cta-button">Discover App</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <span class="carousel-dot active" onclick="goToSlide(0)"></span>
+            <span class="carousel-dot" onclick="goToSlide(1)"></span>
+            <span class="carousel-dot" onclick="goToSlide(2)"></span>
+        </div>
+    </div>
+
+    <section class="features">
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Energy pricing" class="feature-image">
+            <div class="feature-icon">⚡</div>
+            <h3>Competitive Rates</h3>
+            <p>Save money with our transparent pricing and no hidden fees. We offer some of the best energy rates in the UK.</p>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600&h=400&fit=crop" alt="Green energy" class="feature-image">
+            <div class="feature-icon">🌍</div>
+            <h3>Green Energy</h3>
+            <p>Choose our renewable energy options and reduce your carbon footprint while powering your home.</p>
+        </div>
+        <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop" alt="Smart control" class="feature-image">
+            <div class="feature-icon">📱</div>
+            <h3>Smart Control</h3>
+            <p>Manage your account online or via our mobile app. Track usage, submit meter readings, and pay bills with ease.</p>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h2>500K+</h2>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat-item">
+                <h2>4.8★</h2>
+                <p>Average Rating</p>
+            </div>
+            <div class="stat-item">
+                <h2>24/7</h2>
+                <p>Customer Support</p>
+            </div>
+            <div class="stat-item">
+                <h2>100%</h2>
+                <p>UK Coverage</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="Customer" class="testimonial-avatar">
+                    <div>
+                        <div class="testimonial-name">Sarah Thompson</div>
+                        <div class="testimonial-location">Manchester</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Switching to ENERGI was the best decision. Their customer service is outstanding and my bills have decreased significantly!"</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=33" alt="Customer" class="testimonial-avatar">
+                    <div>
+                        <div class="testimonial-name">James Wilson</div>
+                        <div class="testimonial-location">London</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The app makes managing my energy so easy. I can track my usage in real-time and adjust my consumption accordingly."</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="Customer" class="testimonial-avatar">
+                    <div>
+                        <div class="testimonial-name">Emily Roberts</div>
+                        <div class="testimonial-location">Birmingham</div>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Love that they offer 100% renewable energy options. Great rates and I'm helping the environment!"</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo" style="margin-bottom: 1rem;">ENERGI</div>
+        <p>&copy; 2025 ENERGI. Powering UK homes with reliable gas and electric.</p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let autoPlayInterval;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            if (n >= slides.length) currentSlide = 0;
+            if (n < 0) currentSlide = slides.length - 1;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            showSlide(currentSlide);
+            resetAutoPlay();
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+            resetAutoPlay();
+        }
+
+        function autoPlay() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(autoPlay, 5000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        // Start automatic slideshow
+        startAutoPlay();
+
+        // Pause on hover
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+        carousel.addEventListener('mouseleave', startAutoPlay);
+    </script>
+</body>
+</html>
