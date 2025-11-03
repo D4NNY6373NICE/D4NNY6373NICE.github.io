@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M3GTFRNN');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceOne - Your Trusted Banking Partner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: #ff6b35;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(42, 82, 152, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80') center/cover;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff5722;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #1e3c72;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        /* Products Section */
+        .products {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #f0f0f0;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .product-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .product-card ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+
+        .product-card li:before {
+            content: "✓ ";
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .learn-more {
+            display: inline-block;
+            color: #1e3c72;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #1e3c72;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .learn-more:hover {
+            background: #1e3c72;
+            color: white;
+        }
+
+        /* Features Section */
+        .features {
+            background: linear-gradient(rgba(248, 249, 250, 0.95), rgba(248, 249, 250, 0.95)),
+                        url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80') center/cover;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item p {
+            color: #666;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid #ff6b35;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff6b35;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .testimonial-role {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ff6b35;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b35;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M3GTFRNN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+        <nav>
+            <div class="logo">FinanceOne</div>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#features">Why Us</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#apply" class="cta-button">Apply Now</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Banking Made Simple</h1>
+        <p>Your trusted partner for credit cards, savings, insurance, and mortgages</p>
+        <div class="hero-buttons">
+            <a href="#products" class="btn-primary">Explore Products</a>
+            <a href="#apply" class="btn-secondary">Open Account</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">Our Products & Services</h2>
+        
+        <div class="products-grid">
+            <!-- Credit Cards -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&q=80" alt="Credit Cards" class="product-image">
+                <div class="product-content">
+                    <div class="product-icon">💳</div>
+                    <h3>Credit Cards</h3>
+                    <p>Enjoy flexibility and rewards with our range of credit cards designed for every lifestyle.</p>
+                    <ul>
+                        <li>Up to 3% cashback on purchases</li>
+                        <li>Zero annual fee options</li>
+                        <li>Travel rewards & insurance</li>
+                        <li>Contactless payments</li>
+                    </ul>
+                    <a href="#" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- Savings Accounts -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80" alt="Savings Accounts" class="product-image">
+                <div class="product-content">
+                    <div class="product-icon">🏦</div>
+                    <h3>Savings Accounts</h3>
+                    <p>Grow your money with competitive interest rates and flexible savings options.</p>
+                    <ul>
+                        <li>High-yield interest rates</li>
+                        <li>No minimum balance required</li>
+                        <li>Easy online access 24/7</li>
+                        <li>FDIC insured up to $250,000</li>
+                    </ul>
+                    <a href="#" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- Insurance -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="Insurance" class="product-image">
+                <div class="product-content">
+                    <div class="product-icon">🛡️</div>
+                    <h3>Insurance</h3>
+                    <p>Protect what matters most with comprehensive insurance coverage for your family and assets.</p>
+                    <ul>
+                        <li>Life & health insurance</li>
+                        <li>Home & auto coverage</li>
+                        <li>Competitive premiums</li>
+                        <li>24/7 claims support</li>
+                    </ul>
+                    <a href="#" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- Mortgages -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Mortgages" class="product-image">
+                <div class="product-content">
+                    <div class="product-icon">🏠</div>
+                    <h3>Mortgages</h3>
+                    <p>Make your dream home a reality with our flexible mortgage solutions and expert guidance.</p>
+                    <ul>
+                        <li>Fixed & variable rates</li>
+                        <li>First-time buyer programs</li>
+                        <li>Quick pre-approval</li>
+                        <li>Refinancing options</li>
+                    </ul>
+                    <a href="#" class="learn-more">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <h2 class="section-title">Why Choose FinanceOne?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bank-Level Security</h3>
+                    <p>Your data is protected with 256-bit encryption and multi-factor authentication</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Banking</h3>
+                    <p>Manage your finances anytime, anywhere with our award-winning mobile app</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <h3>24/7 Support</h3>
+                    <p>Expert customer service available around the clock to help with any questions</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Transfers</h3>
+                    <p>Send and receive money instantly with zero fees between FinanceOne accounts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80" alt="Sarah Mitchell" class="testimonial-avatar">
+                    <div>
+                        <p class="testimonial-author">Sarah Mitchell</p>
+                        <p class="testimonial-role">Homeowner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"FinanceOne made getting my first mortgage incredibly easy. The team was supportive every step of the way, and I got a great rate!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="James Rodriguez" class="testimonial-avatar">
+                    <div>
+                        <p class="testimonial-author">James Rodriguez</p>
+                        <p class="testimonial-role">Business Owner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The rewards on their credit card are unbeatable. I've earned over $500 in cashback this year alone. Highly recommend!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Emily Chen" class="testimonial-avatar">
+                    <div>
+                        <p class="testimonial-author">Emily Chen</p>
+                        <p class="testimonial-role">Teacher</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Best savings rates I've found anywhere. The mobile app is super user-friendly, and customer service is always helpful."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="apply">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of satisfied customers and experience better banking today</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Open an Account</a>
+            <a href="#contact" class="btn-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>FinanceOne</h3>
+                <p>Your trusted banking partner since 2005. Committed to providing exceptional financial services and customer care.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Products</h3>
+                <ul>
+                    <li><a href="#">Credit Cards</a></li>
+                    <li><a href="#">Savings Accounts</a></li>
+                    <li><a href="#">Insurance</a></li>
+                    <li><a href="#">Mortgages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Locations</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="tel:1-800-FINANCE">1-800-FINANCE</a></li>
+                    <li><a href="mailto:support@financeone.com">support@financeone.com</a></li>
+                    <li>123 Banking Street</li>
+                    <li>New York, NY 10001</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FinanceOne. All rights reserved. | <a href="#" style="color: #888;">Privacy Policy</a> | <a href="#" style="color: #888;">Terms of Service</a></p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Member FDIC. Equal Housing Lender.</p>
+        </div>
+    </footer>
+</body>
+</html>
