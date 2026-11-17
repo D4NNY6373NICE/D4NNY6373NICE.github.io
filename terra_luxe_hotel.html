@@ -3,727 +3,2135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terra Luxe Hotels | Refined Luxury, Natural Elegance</title>
+    <title>Terra Luxe Hotels | Where Earth Meets Elegance</title>
+    <meta name="description" content="Terra Luxe Hotels & Resorts. Refined luxury and natural elegance across twelve destinations worldwide.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        * {
+        /* ---------------------------------------------------------------
+           Design tokens (original Terra Luxe palette)
+           --------------------------------------------------------------- */
+        :root {
+            --brown-900: #2c1810;
+            --brown-800: #3d2514;
+            --brown-700: #5c3d2e;
+            --brown-500: #8b6f47;
+            --gold:      #d4a574;
+            --gold-dark: #c49563;
+            --cream:     #f5e6d3;
+            --cream-50:  #faf3ea;
+
+            --font-display: 'Cormorant Garamond', 'Georgia', serif;
+            --font-body:    'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-pill: 999px;
+
+            --shadow-soft: 0 10px 30px rgba(44, 24, 16, 0.12);
+            --shadow-deep: 0 24px 60px rgba(44, 24, 16, 0.35);
+
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --container: 1280px;
+        }
+
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
         body {
-            font-family: 'Georgia', serif;
-            color: #2c1810;
+            font-family: var(--font-body);
+            font-weight: 300;
+            color: var(--brown-900);
+            background: var(--cream);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(61, 37, 20, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
-            z-index: 1000;
-            transition: all 0.3s ease;
+        img {
+            display: block;
+            max-width: 100%;
         }
 
-        header.scrolled {
-            padding: 1rem 5%;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(var(--container), 100% - 3rem);
+            margin-inline: auto;
+        }
+
+        /* ---------------------------------------------------------------
+           Typography helpers
+           --------------------------------------------------------------- */
+        .eyebrow {
+            display: inline-flex;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+            gap: 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            margin-top: 0.75rem;
+        }
+
+        .section-lede {
+            max-width: 56ch;
+            font-size: 1.05rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        .section-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .on-dark { color: var(--cream); }
+        .on-dark .section-lede { opacity: 0.75; }
+
+        /* ---------------------------------------------------------------
+           Buttons
+           --------------------------------------------------------------- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.9rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid transparent;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            transition: transform 0.35s var(--ease), background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover { transform: translateY(-2px); }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--brown-900);
+            box-shadow: 0 8px 24px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            box-shadow: 0 12px 30px rgba(212, 165, 116, 0.4);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--cream);
+            border-color: rgba(245, 230, 211, 0.45);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-dark {
+            background: var(--brown-900);
+            color: var(--cream);
+        }
+
+        .btn-dark:hover { background: var(--brown-800); }
+
+        /* ---------------------------------------------------------------
+           Header
+           --------------------------------------------------------------- */
+        .site-header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: padding 0.4s var(--ease), background 0.4s, box-shadow 0.4s;
+        }
+
+        .site-header.scrolled {
+            padding: 0.85rem 0;
+            background: rgba(44, 24, 16, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 1px 0 rgba(212, 165, 116, 0.18), 0 10px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #d4a574;
-            letter-spacing: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            color: var(--cream);
+        }
+
+        .logo span {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            transform: rotate(45deg);
         }
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: #f5e6d3;
-            text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            position: relative;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0.85;
+            transition: opacity 0.3s, color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s var(--ease);
         }
 
         .nav-links a:hover {
-            color: #d4a574;
+            opacity: 1;
+            color: var(--gold);
         }
 
-        .book-btn {
-            background: #d4a574;
-            color: #2c1810;
-            padding: 0.8rem 2rem;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
+        .nav-links a:hover::after { transform: scaleX(1); }
 
-        .book-btn:hover {
-            background: #c49563;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(61, 37, 20, 0.7) 0%, rgba(92, 61, 46, 0.7) 100%), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&h=1080&fit=crop') center/cover no-repeat;
+        .nav-actions {
             display: flex;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 0;
+            gap: 1rem;
         }
 
-        .hero::before {
+        .nav-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(245, 230, 211, 0.35);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--cream);
+            place-items: center;
+        }
+
+        .nav-toggle svg { width: 20px; height: 20px; }
+
+        /* Mobile drawer */
+        .mobile-nav {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(44, 24, 16, 0.97);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s;
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav a {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--cream);
+            letter-spacing: 0.08em;
+        }
+
+        .mobile-nav a:hover { color: var(--gold); }
+
+        /* ---------------------------------------------------------------
+           Hero
+           --------------------------------------------------------------- */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            color: var(--cream);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: -6%;
+            background: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1920&h=1080&fit=crop') center/cover no-repeat;
+            z-index: -2;
+            animation: slowZoom 28s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to   { transform: scale(1.08); }
+        }
+
+        .hero::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(61, 37, 20, 0.3);
-            animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100px, -100px); }
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(44, 24, 16, 0.55) 0%, rgba(44, 24, 16, 0.25) 40%, rgba(44, 24, 16, 0.75) 100%),
+                linear-gradient(135deg, rgba(61, 37, 20, 0.35), rgba(92, 61, 46, 0.35));
         }
 
         .hero-content {
-            text-align: center;
-            z-index: 1;
-            animation: fadeInUp 1s ease;
+            padding: 8rem 1.5rem 6rem;
+            max-width: 900px;
+            animation: rise 1.1s var(--ease) both;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+
+        .hero .eyebrow { justify-content: center; }
+        .hero .eyebrow::before { display: none; }
 
         .hero h1 {
-            font-size: 4.5rem;
-            color: #f5e6d3;
-            margin-bottom: 1rem;
-            letter-spacing: 5px;
+            font-family: var(--font-display);
             font-weight: 300;
+            font-size: clamp(3.4rem, 10vw, 7rem);
+            line-height: 1;
+            letter-spacing: 0.12em;
+            margin: 1.25rem 0 1rem;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            color: #d4a574;
-            letter-spacing: 3px;
-            margin-bottom: 3rem;
+            font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2.75rem;
         }
 
-        .hero-btn {
-            background: transparent;
-            border: 2px solid #d4a574;
-            color: #d4a574;
-            padding: 1.2rem 3rem;
-            font-size: 1rem;
-            cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.3s;
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
         }
 
-        .hero-btn:hover {
-            background: #d4a574;
-            color: #2c1810;
-            transform: scale(1.05);
+        .scroll-cue {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.7;
         }
 
-        /* Carousel Section */
-        .carousel-section {
-            padding: 5rem 5%;
-            background: #f5e6d3;
+        .scroll-cue::after {
+            content: '';
+            width: 1px;
+            height: 44px;
+            background: linear-gradient(var(--gold), transparent);
+            animation: cue 2s ease-in-out infinite;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            color: #3d2514;
-            margin-bottom: 3rem;
-            letter-spacing: 3px;
+        @keyframes cue {
+            0%, 100% { transform: scaleY(0.4); transform-origin: top; opacity: 0.3; }
+            50%      { transform: scaleY(1);   transform-origin: top; opacity: 1; }
         }
 
-        .carousel-container {
+        /* ---------------------------------------------------------------
+           Statement band
+           --------------------------------------------------------------- */
+        .statement {
+            background: var(--cream);
+            padding: 6rem 0 4rem;
+        }
+
+        .statement-inner {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .statement h2 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+            line-height: 1.25;
+        }
+
+        .statement h2 em {
+            font-style: italic;
+            color: var(--brown-500);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            border-left: 1px solid rgba(44, 24, 16, 0.15);
+            padding-left: 2.5rem;
+        }
+
+        .stat strong {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 2.6rem;
+            line-height: 1;
+            color: var(--brown-800);
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 0.4rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* ---------------------------------------------------------------
+           Suites carousel
+           --------------------------------------------------------------- */
+        .suites {
+            background: var(--cream);
+            padding: 3rem 0 7rem;
+        }
+
+        .carousel-wrap {
             position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-deep);
+            background: var(--brown-900);
         }
 
         .carousel {
             display: flex;
-            transition: transform 0.5s ease;
+            transition: transform 0.7s var(--ease);
         }
 
         .carousel-item {
-            min-width: 100%;
             position: relative;
+            min-width: 100%;
+            aspect-ratio: 16 / 8;
         }
 
         .carousel-item img {
             width: 100%;
-            height: 600px;
+            height: 100%;
             object-fit: cover;
         }
 
         .carousel-caption {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(61, 37, 20, 0.9));
-            padding: 3rem;
-            color: #f5e6d3;
+            inset: auto 0 0 0;
+            padding: 4rem 3rem 2.5rem;
+            background: linear-gradient(transparent, rgba(44, 24, 16, 0.9));
+            color: var(--cream);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
         }
 
         .carousel-caption h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            letter-spacing: 0.04em;
+            margin: 0.35rem 0 0.25rem;
         }
 
         .carousel-caption p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1rem;
+            opacity: 0.85;
+            max-width: 48ch;
         }
 
-        .carousel-nav {
+        .carousel-caption .btn { flex-shrink: 0; }
+
+        .carousel-arrows {
             position: absolute;
-            top: 50%;
-            width: 100%;
+            inset: 50% 1.25rem auto 1.25rem;
+            transform: translateY(-50%);
             display: flex;
             justify-content: space-between;
-            transform: translateY(-50%);
-            padding: 0 2rem;
+            pointer-events: none;
         }
 
         .carousel-btn {
-            background: rgba(212, 165, 116, 0.8);
-            border: none;
-            color: #2c1810;
-            width: 50px;
-            height: 50px;
+            pointer-events: auto;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            transition: all 0.3s;
+            border: 1px solid rgba(245, 230, 211, 0.35);
+            background: rgba(44, 24, 16, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: var(--cream);
+            display: grid;
+            place-items: center;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease);
         }
 
+        .carousel-btn svg { width: 18px; height: 18px; }
+
         .carousel-btn:hover {
-            background: #d4a574;
-            transform: scale(1.1);
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--brown-900);
+            transform: scale(1.06);
         }
 
         .carousel-dots {
-            text-align: center;
-            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.75rem;
         }
 
         .dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #8b6f47;
-            margin: 0 5px;
-            cursor: pointer;
-            transition: all 0.3s;
+            width: 10px;
+            height: 10px;
+            border-radius: var(--radius-pill);
+            border: none;
+            background: rgba(139, 111, 71, 0.45);
+            padding: 0;
+            transition: width 0.4s var(--ease), background 0.3s;
         }
 
         .dot.active {
-            background: #d4a574;
-            transform: scale(1.3);
+            width: 32px;
+            background: var(--gold);
         }
 
-        /* Features Section */
-        .features {
-            padding: 5rem 5%;
-            background: #8b6f47;
+        /* ---------------------------------------------------------------
+           Experience
+           --------------------------------------------------------------- */
+        .experience {
+            background: linear-gradient(160deg, var(--brown-700) 0%, var(--brown-500) 100%);
+            padding: 7rem 0;
+            color: var(--cream);
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .feature-card {
-            background: rgba(245, 230, 211, 0.1);
-            padding: 3rem;
-            text-align: center;
-            border-radius: 10px;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            position: relative;
+            padding: 2.75rem 2.25rem;
+            border-radius: var(--radius-md);
+            background: rgba(245, 230, 211, 0.07);
+            border: 1px solid rgba(245, 230, 211, 0.14);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            transition: transform 0.45s var(--ease), background 0.3s, border-color 0.3s;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 3px;
+            background: var(--gold);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.45s var(--ease);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: #d4a574;
-            background: rgba(245, 230, 211, 0.15);
+            transform: translateY(-8px);
+            background: rgba(245, 230, 211, 0.11);
+            border-color: rgba(212, 165, 116, 0.5);
         }
 
+        .feature-card:hover::before { transform: scaleY(1); }
+
         .feature-icon {
-            font-size: 3rem;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(212, 165, 116, 0.16);
+            color: var(--gold);
             margin-bottom: 1.5rem;
         }
 
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .feature-card h3 {
-            color: #f5e6d3;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.6rem;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.6rem;
         }
 
         .feature-card p {
-            color: #f5e6d3;
-            opacity: 0.9;
-            line-height: 1.6;
+            opacity: 0.82;
+            font-size: 0.98rem;
         }
 
-        /* Locations */
-        .locations {
-            padding: 5rem 5%;
-            background: #2c1810;
+        /* ---------------------------------------------------------------
+           Destinations
+           --------------------------------------------------------------- */
+        .destinations {
+            background: var(--brown-900);
+            padding: 7rem 0;
+            color: var(--cream);
         }
 
         .locations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 3rem auto 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .location-card {
             position: relative;
-            height: 400px;
+            aspect-ratio: 4 / 5;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            border-radius: 10px;
             cursor: pointer;
+            isolation: isolate;
         }
 
         .location-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 1s var(--ease);
         }
 
-        .location-card:hover img {
-            transform: scale(1.1);
+        .location-card:hover img { transform: scale(1.08); }
+
+        .location-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(44, 24, 16, 0) 35%, rgba(44, 24, 16, 0.92) 100%);
+            transition: opacity 0.4s;
         }
 
         .location-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(61, 37, 20, 0.95));
+            inset: auto 0 0 0;
+            z-index: 1;
             padding: 2rem;
-            color: #f5e6d3;
-            transform: translateY(60%);
-            transition: transform 0.3s;
         }
 
-        .location-card:hover .location-overlay {
-            transform: translateY(0);
-        }
+        .location-overlay .eyebrow { font-size: 0.65rem; }
 
         .location-overlay h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1.9rem;
+            letter-spacing: 0.03em;
+            margin: 0.4rem 0 0.3rem;
         }
 
         .location-overlay p {
-            opacity: 0.9;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transform: translateY(8px);
+            transition: opacity 0.45s var(--ease), max-height 0.45s var(--ease), transform 0.45s var(--ease);
         }
 
-        /* Footer */
-        footer {
-            background: #3d2514;
-            color: #f5e6d3;
-            padding: 3rem 5%;
-            text-align: center;
+        .location-card:hover .location-overlay p {
+            opacity: 0.85;
+            max-height: 6rem;
+            transform: translateY(0);
         }
 
-        footer p {
+        /* ---------------------------------------------------------------
+           About
+           --------------------------------------------------------------- */
+        .about {
+            background: var(--cream-50);
+            padding: 7rem 0;
+        }
+
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-media {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-deep);
+            aspect-ratio: 4 / 5;
+        }
+
+        .about-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-media::before {
+            content: '';
+            position: absolute;
+            inset: 1rem;
+            border: 1px solid rgba(245, 230, 211, 0.5);
+            border-radius: calc(var(--radius-lg) - 8px);
+            pointer-events: none;
+        }
+
+        .about-copy p {
+            margin-top: 1.25rem;
+            font-size: 1.05rem;
+            opacity: 0.85;
+            max-width: 52ch;
+        }
+
+        .about-copy .btn { margin-top: 2.25rem; }
+
+        .signature {
+            margin-top: 2.5rem;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--brown-500);
+        }
+
+        /* ---------------------------------------------------------------
+           Footer
+           --------------------------------------------------------------- */
+        .site-footer {
+            background: var(--brown-800);
+            color: var(--cream);
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(245, 230, 211, 0.14);
+        }
+
+        .footer-brand p {
+            margin-top: 1rem;
+            max-width: 38ch;
+            opacity: 0.75;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .footer-col a {
             opacity: 0.8;
-            letter-spacing: 1px;
+            font-size: 0.95rem;
+            transition: opacity 0.3s, color 0.3s;
         }
 
-        /* Mobile Responsive Styles */
+        .footer-col a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: 1.75rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            opacity: 0.6;
+        }
+
+        /* ---------------------------------------------------------------
+           Scroll reveal
+           --------------------------------------------------------------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+        }
+
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .hero-bg, .scroll-cue::after { animation: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ---------------------------------------------------------------
+           Responsive
+           --------------------------------------------------------------- */
+        @media (max-width: 960px) {
+            .statement-inner,
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .stats {
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid rgba(44, 24, 16, 0.15);
+                padding-top: 2rem;
+            }
+
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+            .nav-links { display: none; }
+            .nav-toggle { display: grid; }
+            .nav-actions .btn { display: none; }
 
-            .logo {
-                font-size: 1.3rem;
-                letter-spacing: 2px;
-            }
-
-            .book-btn {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.85rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-                letter-spacing: 3px;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-                letter-spacing: 2px;
-                margin-bottom: 2rem;
-            }
-
-            .hero-btn {
-                padding: 1rem 2rem;
-                font-size: 0.9rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .carousel-section {
-                padding: 3rem 3%;
-            }
-
-            .carousel-item img {
-                height: 400px;
-            }
+            .carousel-item { aspect-ratio: 4 / 5; }
 
             .carousel-caption {
-                padding: 2rem 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 3rem 1.5rem 1.5rem;
             }
 
-            .carousel-caption h3 {
-                font-size: 1.5rem;
-            }
-
-            .carousel-caption p {
-                font-size: 0.95rem;
-            }
+            .carousel-arrows { inset: 50% 0.75rem auto 0.75rem; }
 
             .carousel-btn {
                 width: 40px;
                 height: 40px;
-                font-size: 1.2rem;
             }
 
-            .carousel-nav {
-                padding: 0 1rem;
+            .section-head { margin-bottom: 2rem; }
+
+            .statement,
+            .suites,
+            .experience,
+            .destinations,
+            .about,
+            .site-footer {
+                padding-top: 4.5rem;
+                padding-bottom: 4.5rem;
             }
 
-            .features {
-                padding: 3rem 3%;
-            }
+            .about-media { aspect-ratio: 4 / 3; }
 
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .feature-card {
-                padding: 2rem;
-            }
-
-            .locations {
-                padding: 3rem 3%;
-            }
-
-            .locations-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .location-card {
-                height: 350px;
-            }
-
-            footer {
-                padding: 2rem 5%;
-                font-size: 0.9rem;
-            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { justify-content: center; text-align: center; }
         }
 
         @media (max-width: 480px) {
-            header {
-                padding: 1rem 3%;
-            }
-
-            .logo {
-                font-size: 1.1rem;
-            }
-
-            .book-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-                letter-spacing: 2px;
-            }
-
-            .hero p {
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-            }
-
-            .section-title {
-                font-size: 1.6rem;
-            }
-
-            .carousel-item img {
-                height: 300px;
-            }
-
-            .carousel-caption h3 {
-                font-size: 1.2rem;
-            }
-
-            .carousel-caption p {
-                font-size: 0.85rem;
-            }
-
-            .location-card {
-                height: 300px;
-            }
-
-            .location-overlay h3 {
-                font-size: 1.5rem;
-            }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .hero-actions .btn { width: 100%; }
+            .location-overlay { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <header id="header">
-        <nav>
-            <div class="logo">TERRA LUXE</div>
+
+    <!-- ============================================================ -->
+    <!-- Header                                                        -->
+    <!-- ============================================================ -->
+    <header class="site-header" id="header">
+        <div class="container nav">
+            <a href="#home" class="logo"><span></span>TERRA LUXE</a>
+
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="#rooms">Suites</a></li>
                 <li><a href="#locations">Destinations</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
-            <button class="book-btn">Reserve Now</button>
-        </nav>
+
+            <div class="nav-actions">
+                <a href="#rooms" class="btn btn-primary">Reserve Now</a>
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M4 7h16M4 12h16M4 17h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
     </header>
 
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+        <a href="#home">Home</a>
+        <a href="#rooms">Suites</a>
+        <a href="#locations">Destinations</a>
+        <a href="#about">About</a>
+        <a href="#rooms" class="btn btn-primary">Reserve Now</a>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- Hero                                                          -->
+    <!-- ============================================================ -->
     <section class="hero" id="home">
+        <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-content">
+            <span class="eyebrow">Hotels &amp; Resorts</span>
             <h1>TERRA LUXE</h1>
-            <p>WHERE EARTH MEETS ELEGANCE</p>
-            <button class="hero-btn">Explore Our World</button>
+            <p>Where Earth Meets Elegance</p>
+            <div class="hero-actions">
+                <a href="#rooms" class="btn btn-primary">Explore Our World</a>
+                <a href="#locations" class="btn btn-ghost">Our Destinations</a>
+            </div>
+        </div>
+        <div class="scroll-cue" aria-hidden="true">Scroll</div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Statement                                                     -->
+    <!-- ============================================================ -->
+    <section class="statement">
+        <div class="container statement-inner reveal">
+            <h2>Twelve addresses shaped by their landscapes. One quiet belief: <em>that true luxury is rooted in place.</em></h2>
+            <div class="stats">
+                <div class="stat"><strong>12</strong><span>Destinations</span></div>
+                <div class="stat"><strong>4</strong><span>Continents</span></div>
+                <div class="stat"><strong>24/7</strong><span>Concierge</span></div>
+            </div>
         </div>
     </section>
 
-    <section class="carousel-section" id="rooms">
-        <h2 class="section-title">Our Signature Suites</h2>
-        <div class="carousel-container">
-            <div class="carousel" id="carousel">
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1200&h=600&fit=crop" alt="Terracotta Suite">
-                    <div class="carousel-caption">
-                        <h3>Terracotta Suite</h3>
-                        <p>Inspired by ancient earth, designed for modern luxury</p>
+    <!-- ============================================================ -->
+    <!-- Signature suites                                              -->
+    <!-- ============================================================ -->
+    <section class="suites" id="rooms">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="eyebrow">Stay</span>
+                    <h2 class="section-title">Our Signature Suites</h2>
+                </div>
+                <p class="section-lede">Each suite is drawn from the earth it stands on: terracotta, sandalwood and amber, warmed by light and softened by hand.</p>
+            </div>
+
+            <div class="carousel-wrap reveal" id="carouselWrap">
+                <div class="carousel" id="carousel">
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1600&h=800&fit=crop" alt="Terracotta Suite">
+                        <div class="carousel-caption">
+                            <div>
+                                <span class="eyebrow">Suite</span>
+                                <h3>Terracotta Suite</h3>
+                                <p>Inspired by ancient earth, designed for modern luxury.</p>
+                            </div>
+                            <a href="#rooms" class="btn btn-primary">Reserve</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&h=800&fit=crop" alt="Sandalwood Penthouse">
+                        <div class="carousel-caption">
+                            <div>
+                                <span class="eyebrow">Penthouse</span>
+                                <h3>Sandalwood Penthouse</h3>
+                                <p>Elevated living with panoramic serenity.</p>
+                            </div>
+                            <a href="#rooms" class="btn btn-primary">Reserve</a>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1600&h=800&fit=crop" alt="Amber Villa">
+                        <div class="carousel-caption">
+                            <div>
+                                <span class="eyebrow">Villa</span>
+                                <h3>Amber Villa</h3>
+                                <p>A private sanctuary with timeless warmth.</p>
+                            </div>
+                            <a href="#rooms" class="btn btn-primary">Reserve</a>
+                        </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=600&fit=crop" alt="Sandalwood Penthouse">
-                    <div class="carousel-caption">
-                        <h3>Sandalwood Penthouse</h3>
-                        <p>Elevated living with panoramic serenity</p>
+
+                <div class="carousel-arrows">
+                    <button class="carousel-btn" id="prevBtn" aria-label="Previous suite">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+                    </button>
+                    <button class="carousel-btn" id="nextBtn" aria-label="Next suite">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="carousel-dots" id="dots" role="tablist" aria-label="Suite slides"></div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Experience                                                    -->
+    <!-- ============================================================ -->
+    <section class="experience on-dark">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="eyebrow">Experience</span>
+                    <h2 class="section-title">The Terra Luxe Experience</h2>
+                </div>
+                <p class="section-lede">Wellness, dining and culture, each shaped by the land around you.</p>
+            </div>
+
+            <div class="features-grid">
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M5 19c6 0 12-5 13-14-9 1-14 7-13 14z"/><path d="M5 19c3-4 6-7 10-9"/></svg>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=1200&h=600&fit=crop" alt="Amber Villa">
-                    <div class="carousel-caption">
-                        <h3>Amber Villa</h3>
-                        <p>Private sanctuary with timeless warmth</p>
+                    <h3>Natural Wellness</h3>
+                    <p>Organic spa treatments using earth-sourced ingredients and traditional healing practices.</p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 0 0 6 0V3"/><path d="M9 3v18"/><path d="M18 3c-2 1-3 4-3 7v2h3v9"/></svg>
                     </div>
-                </div>
-            </div>
-            <div class="carousel-nav">
-                <button class="carousel-btn" onclick="moveCarousel(-1)">&#10094;</button>
-                <button class="carousel-btn" onclick="moveCarousel(1)">&#10095;</button>
-            </div>
-        </div>
-        <div class="carousel-dots" id="dots"></div>
-    </section>
+                    <h3>Farm-to-Table Dining</h3>
+                    <p>Michelin-starred cuisine celebrating local terroir and seasonal abundance.</p>
+                </article>
 
-    <section class="features">
-        <h2 class="section-title" style="color: #f5e6d3;">The Terra Luxe Experience</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🌿</div>
-                <h3>Natural Wellness</h3>
-                <p>Organic spa treatments using earth-sourced ingredients and traditional healing practices</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🍽️</div>
-                <h3>Farm-to-Table Dining</h3>
-                <p>Michelin-starred cuisine celebrating local terroir and seasonal abundance</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏛️</div>
-                <h3>Cultural Heritage</h3>
-                <p>Immersive experiences connecting you to local artisans and ancient traditions</p>
+                <article class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V10M9 21V10M15 21V10M19 21V10"/><path d="M3 10l9-6 9 6"/></svg>
+                    </div>
+                    <h3>Cultural Heritage</h3>
+                    <p>Immersive experiences connecting you to local artisans and ancient traditions.</p>
+                </article>
             </div>
         </div>
     </section>
 
-    <section class="locations" id="locations">
-        <h2 class="section-title" style="color: #f5e6d3;">Our Destinations</h2>
-        <div class="locations-grid">
-            <div class="location-card">
-                <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=400&h=400&fit=crop" alt="Tuscany">
-                <div class="location-overlay">
-                    <h3>Tuscany, Italy</h3>
-                    <p>Rolling hills, vineyard vistas, and Renaissance splendor await in our countryside estate</p>
+    <!-- ============================================================ -->
+    <!-- Destinations                                                  -->
+    <!-- ============================================================ -->
+    <section class="destinations on-dark" id="locations">
+        <div class="container">
+            <div class="section-head reveal">
+                <div>
+                    <span class="eyebrow">Explore</span>
+                    <h2 class="section-title">Our Destinations</h2>
                 </div>
+                <p class="section-lede">From Renaissance hills to Zen gardens and desert riads, every Terra Luxe address belongs to its place.</p>
             </div>
-            <div class="location-card">
-                <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=400&h=400&fit=crop" alt="Kyoto">
-                <div class="location-overlay">
-                    <h3>Kyoto, Japan</h3>
-                    <p>Zen gardens and temple serenity in a traditional machiya reimagined</p>
-                </div>
-            </div>
-            <div class="location-card">
-                <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=400&h=400&fit=crop" alt="Marrakech">
-                <div class="location-overlay">
-                    <h3>Marrakech, Morocco</h3>
-                    <p>Moorish elegance meets desert mystique in our palatial riad</p>
-                </div>
+
+            <div class="locations-grid">
+                <article class="location-card reveal">
+                    <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&h=1000&fit=crop" alt="Tuscany, Italy">
+                    <div class="location-overlay">
+                        <span class="eyebrow">Italy</span>
+                        <h3>Tuscany</h3>
+                        <p>Rolling hills, vineyard vistas and Renaissance splendour in our countryside estate.</p>
+                    </div>
+                </article>
+
+                <article class="location-card reveal">
+                    <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=1000&fit=crop" alt="Kyoto, Japan">
+                    <div class="location-overlay">
+                        <span class="eyebrow">Japan</span>
+                        <h3>Kyoto</h3>
+                        <p>Zen gardens and temple serenity in a traditional machiya, reimagined.</p>
+                    </div>
+                </article>
+
+                <article class="location-card reveal">
+                    <img src="https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&h=1000&fit=crop" alt="Marrakech, Morocco">
+                    <div class="location-overlay">
+                        <span class="eyebrow">Morocco</span>
+                        <h3>Marrakech</h3>
+                        <p>Moorish elegance meets desert mystique in our palatial riad.</p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Terra Luxe Hotels. All rights reserved. | Where Earth Meets Elegance</p>
+    <!-- ============================================================ -->
+    <!-- About                                                         -->
+    <!-- ============================================================ -->
+    <section class="about" id="about">
+        <div class="container about-inner">
+            <div class="about-media reveal">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1000&h=1250&fit=crop" alt="Terra Luxe terrace at dusk">
+            </div>
+            <div class="about-copy reveal">
+                <span class="eyebrow">About</span>
+                <h2 class="section-title">Rooted in place, refined by time</h2>
+                <p>Terra Luxe was founded on a simple idea: that the most memorable stays are the ones that feel inseparable from where they are. We build with local stone, cook from local soil and listen to local stories.</p>
+                <p>Every property is small enough to know you by name and considered enough to anticipate what you have not yet asked for. Our concierge team is available around the clock, wherever in the world you happen to be.</p>
+                <a href="#rooms" class="btn btn-dark">Plan Your Stay</a>
+                <p class="signature">Where Earth Meets Elegance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Footer                                                        -->
+    <!-- ============================================================ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#home" class="logo"><span></span>TERRA LUXE</a>
+                    <p>Refined luxury and natural elegance across twelve destinations, each shaped by the landscape it belongs to.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#rooms">Signature Suites</a></li>
+                        <li><a href="#locations">Destinations</a></li>
+                        <li><a href="#about">About Terra Luxe</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Guest Services</h4>
+                    <ul>
+                        <li><a href="#rooms">Reservations</a></li>
+                        <li><a href="#rooms">Spa Bookings</a></li>
+                        <li><a href="#about">Concierge</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Terra Luxe Hotels. All rights reserved.</span>
+                <span>Where Earth Meets Elegance</span>
+            </div>
+        </div>
     </footer>
 
-    <script src="https://github.com/Cognigy/Webchat/releases/latest/download/webchat.js"></script>
-<script>
-	initWebchat(
-		"https://endpoint-trial.cognigy.ai/b1cb0bc403f61bbacf96d3e9deb9bddbc8dd66af12dec0b45ff7c50d3d0fe4ff"
-	);
-</script>
+    <!-- ============================================================ -->
+    <!-- Jeffrey live popups (ntfy.sh, server-sent events)             -->
+    <!-- Topic: terra-luxe-jeffrey-demo2026                            -->
+    <!-- ============================================================ -->
+    <style>
+        .tl-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(44, 24, 16, 0.32);
+            display: grid;
+            place-items: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s;
+        }
+
+        .tl-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .tl-modal {
+            position: relative;
+            width: min(960px, 100%);
+            max-height: calc(100svh - 3rem);
+            overflow: auto;
+            background: var(--cream-50);
+            color: var(--brown-900);
+            border-radius: var(--radius-lg);
+            /* Soft blurred halo around the popup edge, page behind stays sharp */
+            box-shadow:
+                0 0 0 1px rgba(212, 165, 116, 0.35),
+                0 0 28px 10px rgba(245, 230, 211, 0.28),
+                0 0 90px 30px rgba(245, 230, 211, 0.16),
+                0 30px 80px rgba(44, 24, 16, 0.55);
+            transform: translateY(24px) scale(0.98);
+            transition: transform 0.45s var(--ease);
+        }
+
+        .tl-overlay.open .tl-modal { transform: none; }
+
+        .tl-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(245, 230, 211, 0.4);
+            background: rgba(44, 24, 16, 0.55);
+            color: var(--cream);
+            display: grid;
+            place-items: center;
+            transition: background 0.3s;
+        }
+
+        .tl-close:hover { background: var(--gold); color: var(--brown-900); }
+        .tl-close svg { width: 18px; height: 18px; }
+
+        .tl-badge {
+            position: absolute;
+            top: 1.1rem;
+            left: 1.25rem;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: var(--radius-pill);
+            background: rgba(44, 24, 16, 0.6);
+            color: var(--cream);
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .tl-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 0 0 rgba(212, 165, 116, 0.6);
+            animation: tlPulse 1.8s infinite;
+        }
+
+        @keyframes tlPulse {
+            0%   { box-shadow: 0 0 0 0 rgba(212, 165, 116, 0.6); }
+            100% { box-shadow: 0 0 0 10px rgba(212, 165, 116, 0); }
+        }
+
+        /* Hotel card */
+        .tl-hotel-hero {
+            position: relative;
+            height: 320px;
+            background: var(--brown-800);
+        }
+
+        .tl-hotel-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tl-hotel-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(44, 24, 16, 0.1) 40%, rgba(44, 24, 16, 0.85) 100%);
+        }
+
+        .tl-hotel-title {
+            position: absolute;
+            left: 2rem;
+            right: 2rem;
+            bottom: 1.5rem;
+            z-index: 1;
+            color: var(--cream);
+        }
+
+        .tl-hotel-title h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            line-height: 1.1;
+            margin-top: 0.3rem;
+        }
+
+        .tl-hotel-body {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .tl-hotel-body p { font-size: 0.98rem; opacity: 0.85; }
+
+        .tl-section-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--brown-500);
+            margin: 1.5rem 0 0.6rem;
+        }
+
+        .tl-hotel-body .tl-section-label:first-child { margin-top: 0; }
+
+        .tl-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tl-chip {
+            padding: 0.35rem 0.8rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(139, 111, 71, 0.35);
+            font-size: 0.8rem;
+        }
+
+        .tl-list { list-style: none; display: grid; gap: 0.45rem; font-size: 0.92rem; }
+        .tl-list li { padding-left: 1rem; position: relative; }
+        .tl-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .tl-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+
+        .tl-gallery img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+        }
+
+        .tl-signature {
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.4rem;
+            border-radius: var(--radius-md);
+            background: var(--brown-900);
+            color: var(--cream);
+            font-size: 0.92rem;
+        }
+
+        .tl-signature strong {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Booking card */
+        .tl-booking {
+            width: min(640px, 100%);
+            padding: 3.5rem 2.5rem 2.5rem;
+        }
+
+        .tl-booking-head {
+            text-align: center;
+            padding-bottom: 1.75rem;
+            border-bottom: 1px solid rgba(139, 111, 71, 0.25);
+        }
+
+        .tl-booking-head h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 2rem;
+            margin-top: 0.4rem;
+        }
+
+        .tl-ref {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: var(--radius-pill);
+            background: var(--brown-900);
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            letter-spacing: 0.22em;
+        }
+
+        .tl-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.9rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--brown-500);
+        }
+
+        .tl-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #5a8a4a;
+        }
+
+        .tl-status.cancelled::before { background: #b5533c; }
+
+        .tl-rows {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem 2rem;
+            padding-top: 1.75rem;
+        }
+
+        .tl-row span {
+            display: block;
+            font-size: 0.66rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--brown-500);
+            margin-bottom: 0.25rem;
+        }
+
+        .tl-row strong {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.25rem;
+        }
+
+        .tl-total {
+            grid-column: 1 / -1;
+            margin-top: 0.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(139, 111, 71, 0.25);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .tl-total strong { font-size: 1.8rem; }
+
+        /* Room comparison */
+        .tl-rooms-head { padding: 1.5rem 2rem 0.5rem 7.5rem; }
+
+        .tl-rooms-head h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .tl-rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1.25rem 2rem 2rem;
+        }
+
+        .tl-room {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1.25rem 1.25rem;
+            border-radius: var(--radius-md);
+            background: var(--cream);
+            border: 1px solid rgba(139, 111, 71, 0.25);
+        }
+
+        .tl-room.featured {
+            background: var(--brown-900);
+            color: var(--cream);
+            border-color: var(--gold);
+        }
+
+        .tl-room .tl-room-tier {
+            font-size: 0.62rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--brown-500);
+        }
+
+        .tl-room.featured .tl-room-tier { color: var(--gold); }
+
+        .tl-room h4 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            font-size: 1.35rem;
+            line-height: 1.15;
+            margin: 0.3rem 0 0.75rem;
+        }
+
+        .tl-room-rate {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            line-height: 1;
+        }
+
+        .tl-room-rate small {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            opacity: 0.65;
+            margin-top: 0.3rem;
+        }
+
+        .tl-room-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin: 0.9rem 0;
+            font-size: 0.78rem;
+            opacity: 0.8;
+        }
+
+        .tl-room ul {
+            list-style: none;
+            display: grid;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            margin-top: auto;
+            padding-top: 0.9rem;
+            border-top: 1px solid rgba(139, 111, 71, 0.25);
+        }
+
+        .tl-room.featured ul { border-top-color: rgba(245, 230, 211, 0.2); }
+
+        .tl-room li { padding-left: 1rem; position: relative; }
+        .tl-room li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 5px;
+            height: 5px;
+            background: var(--gold);
+            transform: rotate(45deg);
+        }
+
+        .tl-room-best {
+            position: absolute;
+            top: -0.6rem;
+            right: 1rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: var(--radius-pill);
+            background: var(--gold);
+            color: var(--brown-900);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Map card */
+        .tl-map { width: min(900px, 100%); }
+
+        .tl-map-head {
+            padding: 1.5rem 2rem 1rem 7.5rem;
+        }
+
+        .tl-map-head h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 1.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .tl-map iframe {
+            display: block;
+            width: 100%;
+            height: min(520px, 60svh);
+            border: 0;
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        }
+
+        /* Connection pill */
+        .tl-live {
+            position: fixed;
+            left: 1rem;
+            bottom: 1rem;
+            z-index: 1500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-pill);
+            background: rgba(44, 24, 16, 0.75);
+            color: var(--cream);
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.55;
+            transition: opacity 0.3s;
+        }
+
+        .tl-live:hover { opacity: 1; }
+
+        .tl-live i {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #b5533c;
+        }
+
+        .tl-live.on i { background: #5a8a4a; }
+
+        @media (max-width: 768px) {
+            .tl-hotel-body { grid-template-columns: 1fr; padding: 1.5rem; }
+            .tl-hotel-hero { height: 220px; }
+            .tl-hotel-title { left: 1.25rem; right: 1.25rem; }
+            .tl-booking { padding: 3.5rem 1.5rem 1.75rem; }
+            .tl-rows { grid-template-columns: 1fr; }
+            .tl-map-head { padding: 3.5rem 1.5rem 1rem; }
+            .tl-rooms-head { padding: 3.5rem 1.5rem 0.5rem; }
+            .tl-rooms-grid { padding: 1rem 1.5rem 1.5rem; grid-template-columns: 1fr; }
+        }
+    </style>
+
+    <div class="tl-overlay" id="tlOverlay" aria-hidden="true">
+        <div class="tl-modal" id="tlModal" role="dialog" aria-modal="true"></div>
+    </div>
+    <div class="tl-live" id="tlLive" title="Live link to Jeffrey"><i></i>Jeffrey</div>
 
     <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        (function () {
+            const TOPIC = 'terra-luxe-jeffrey-demo2026';
+            const MAPS_KEY = 'AIzaSyDL2wA7jf_97VpwBNkpeKCgBjdbaPrGHvA';
+
+            const HOTELS = {
+                'The Kensington Grand': {
+                    city: 'London',
+                    tagline: 'A restored Victorian mansion steps from Hyde Park',
+                    description: 'A five-star hotel housed in a beautifully restored Victorian mansion, just steps from the Natural History Museum and Hyde Park. Original plasterwork, sweeping marble staircases and stained glass skylights sit alongside thoroughly modern comforts.',
+                    amenities: ['Underground spa and heated pool', '24-hour fitness centre', 'Vintage Bentley service', 'Theatre and museum concierge'],
+                    dining: ['The Conservatory, seasonal British fine dining', 'The Cromwell Bar, craft cocktails', 'Garden Terrace, afternoon tea'],
+                    rooms: '82 rooms and suites with period fireplaces, rainfall showers and underfloor heating.',
+                    signature: 'Curator\'s Evening: private after-hours access to nearby museums, arranged exclusively for residents.',
+                    images: ['https://images.unsplash.com/photo-1622916053149-008b5a2673d1?w=1200&q=70', 'https://plus.unsplash.com/premium_photo-1661962360690-e91cc0df88f1?w=600&q=60', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=60'],
+                    map: 'Kensington, London'
+                },
+                'Le Marais Residences': {
+                    city: 'Paris',
+                    tagline: 'A 17th-century hôtel particulier in the Marais',
+                    description: 'An intimate boutique property of just 45 suites around a private courtyard garden, with original frescoes, herringbone parquet and Juliet balconies over cobbled streets of galleries and patisseries.',
+                    amenities: ['Rooftop terrace with Eiffel Tower views', 'Private wine cellar and sommelier', 'Heated indoor lap pool', 'Personal shopping service'],
+                    dining: ['L\'Atelier, Michelin-starred French cuisine', 'Le Jardin Secret, courtyard farm-to-table', 'The Vault Bar, cocktails in an 18th-century cellar'],
+                    rooms: '45 suites from 65 to 200 square metres with Carrara marble bathrooms and soaking tubs.',
+                    signature: 'Artisan\'s Journey: perfume creation at historic fragrance houses and private atelier visits with Parisian designers.',
+                    images: ['https://images.unsplash.com/photo-1546783155-4ef83c00d4ef?w=1200&q=70', 'https://images.unsplash.com/photo-1725016799201-b3e07e9c27ad?w=600&q=60', 'https://images.unsplash.com/photo-1592229505801-77b31918d822?w=600&q=60'],
+                    map: 'Le Marais, Paris'
+                },
+                'The Palm Dubai': {
+                    city: 'Dubai',
+                    tagline: 'Ultra-luxury on a private stretch of the Palm',
+                    description: 'Rising from the Arabian Gulf with architecture inspired by desert dunes, this 280-suite resort spans a private section of the Palm Jumeirah with pristine beaches and views of the Dubai skyline.',
+                    amenities: ['Three infinity pools with cabana service', '5,000 square metre spa and hammam', 'Private marina and yacht charter', 'Helipad for arrivals and tours'],
+                    dining: ['Zafran, contemporary Middle Eastern', 'Aqua, underwater dining', 'Sky Lounge, rooftop bar on the 52nd floor', 'Pearl, seafood and champagne on the pier'],
+                    rooms: '280 suites and villas with private terraces, Italian marble bathrooms and smart-room technology.',
+                    signature: 'Desert Stars: a private safari in vintage Land Rovers, falconry, sunset champagne on the dunes and a helicopter return over the Palm.',
+                    images: ['https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=70', 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=60', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&q=60'],
+                    map: 'Palm Jumeirah, Dubai'
+                },
+                'The Manhattan Heights': {
+                    city: 'New York',
+                    tagline: 'Floors 48 to 72 above Midtown',
+                    description: 'A sophisticated urban sanctuary blending 1920s glamour with modern design, with 195 rooms and suites overlooking Central Park, the Empire State Building and the Hudson River.',
+                    amenities: ['72nd-floor observation deck and lounge', 'Spa with chromotherapy suites', 'Complimentary Tesla car service', 'Private cinema'],
+                    dining: ['Elevation, New American cuisine', 'The Jazz Room, live music supper club', 'Sky Bar, champagne and caviar with 360-degree views'],
+                    rooms: '195 rooms and suites from 450 to 2,500 square feet with floor-to-ceiling windows.',
+                    signature: 'Insider\'s New York: Broadway rehearsals, after-hours MoMA and Met tours and backstage passes to Carnegie Hall.',
+                    images: ['https://images.unsplash.com/photo-1479502806991-251c94be6b15?w=1200&q=70', 'https://images.unsplash.com/photo-1725016799585-c3f2a823c173?w=600&q=60', 'https://images.unsplash.com/photo-1704971973105-55fbbea63b47?w=600&q=60'],
+                    map: 'Midtown Manhattan, New York'
+                },
+                'The Marina Bay Residence': {
+                    city: 'Singapore',
+                    tagline: 'A glass tower over Marina Bay',
+                    description: 'The pinnacle of Asian luxury hospitality: 156 suites and residences with cutting-edge technology, sustainable design and award-winning service, overlooking Singapore\'s skyline.',
+                    amenities: ['Infinity pool with underwater sound system', 'Award-winning spa with Asian therapies', 'Private yacht for harbour cruises', 'Rooftop meditation garden'],
+                    dining: ['Straits, contemporary Singaporean', 'Sakura, kaiseki and omakase', 'Cloud 61, sky bar'],
+                    rooms: '156 suites and residences with smart-home integration and spa-style bathrooms.',
+                    signature: 'Gardens and Gastronomy: sunrise tai chi at Gardens by the Bay and a cooking class with a Michelin-starred chef.',
+                    images: ['https://images.unsplash.com/photo-1516422641841-cd9803ab02c6?w=1200&q=70', 'https://images.unsplash.com/photo-1698812007623-341dd87a3333?w=600&q=60', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=60'],
+                    map: 'Marina Bay, Singapore'
+                },
+                'Coral Sands Maldives': {
+                    city: 'Maldives',
+                    tagline: 'A private island in the North Malé Atoll',
+                    description: 'An eco-luxury resort of 85 overwater and beachfront villas surrounded by turquoise lagoons and vibrant coral reefs, where the only sounds are gentle waves and tropical birds.',
+                    amenities: ['Overwater spa with glass-floor treatment rooms', 'PADI dive centre with marine biologists', 'Turtle rehabilitation programme', 'Open-air beach cinema'],
+                    dining: ['Tides, overwater fine dining', 'Coral, underwater restaurant', 'Barefoot Grill, beachfront seafood', 'Sunset Bar, overwater cocktails'],
+                    rooms: '85 villas with private infinity pools, outdoor rain showers and stairs into the lagoon.',
+                    signature: 'Ocean Guardian: coral restoration, night snorkelling with bioluminescent plankton and private sunset dolphin cruises.',
+                    images: ['https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=70', 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=60', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=60'],
+                    map: 'Male, Maldives'
+                },
+                'The Caldera Collection Santorini': {
+                    city: 'Santorini',
+                    tagline: 'Cave suites carved into the cliffs of Oia',
+                    description: 'Thirty exclusive cave suites and villas cascading down the volcanic rock face, with uninterrupted views of the Aegean and the legendary Santorini sunset.',
+                    amenities: ['Cliffside infinity pool with swim-up bar', 'Cave spa with volcanic stone treatments', 'Private yacht for caldera sailing', 'Helipad'],
+                    dining: ['Nectar, Mediterranean fine dining', 'The Olive Grove, Greek taverna', 'Ambrosia, molecular Greek chef\'s table'],
+                    rooms: '30 cave suites and villas with private infinity pools or hot tubs on every terrace.',
+                    signature: 'Volcanic Heritage: a private tour of Akrotiri, family wineries closed to the public and a sunset catamaran cruise.',
+                    images: ['https://images.unsplash.com/photo-1623682037446-4b2ec30dbfff?w=1200&q=70', 'https://images.unsplash.com/photo-1677129666186-d29eba893fe3?w=600&q=60', 'https://images.unsplash.com/photo-1718376419415-295954c1a0e3?w=600&q=60'],
+                    map: 'Oia, Santorini'
+                },
+                'The Ubud Rainforest Estate': {
+                    city: 'Bali',
+                    tagline: 'Private villas among rice terraces and jungle',
+                    description: 'A sanctuary of 48 private villas in Bali\'s central highlands near the sacred Monkey Forest, each a traditional compound with thatched roofs and views of the Ayung River valley.',
+                    amenities: ['Hillside spa with Balinese healing treatments', 'Two-level infinity pool over rice terraces', 'Open-air yoga pavilion', 'Balinese cooking school'],
+                    dining: ['Sawah, farm-to-table Indonesian', 'The Spice Market, pan-Asian', 'Jungle Bar, treehouse lounge'],
+                    rooms: '48 villas with private pools, open-air bathrooms and dedicated villa hosts.',
+                    signature: 'Soul of Bali: a dawn blessing at a mountaintop temple, silver-smithing with master craftsmen and forest bathing with a local healer.',
+                    images: ['https://images.unsplash.com/photo-1544986581-efac024faf62?w=1200&q=70', 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=60', 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=60'],
+                    map: 'Ubud, Bali'
+                },
+                'The Amalfi Cliff House': {
+                    city: 'Positano',
+                    tagline: 'Restored 18th-century buildings on the cliffs of Positano',
+                    description: 'An intimate 35-suite property linked by flower-draped terraces and stone pathways, with cascading gardens, lemon groves and panoramic views of the Mediterranean.',
+                    amenities: ['Clifftop infinity pool', 'Private beach club with boat service', 'Vintage Fiat 500 fleet', 'Boat excursions to Capri'],
+                    dining: ['Terrazza, Michelin-recommended Italian', 'La Limonaia, dining in the lemon grove', 'Beach Club Restaurant, fresh seafood'],
+                    rooms: '35 suites with hand-painted majolica tiles, sea-view terraces and, in some, private plunge pools.',
+                    signature: 'Taste of Amalfi: mozzarella making at a buffalo farm, a fishing trip with local fishermen and a limoncello workshop.',
+                    images: ['https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&q=70', 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=60', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600&q=60'],
+                    map: 'Positano, Italy'
+                },
+                'Kyoto Heritage House': {
+                    city: 'Kyoto',
+                    tagline: 'Restored machiya townhouses in Higashiyama',
+                    description: 'A collection of 25 restored machiya townhouses and a ryokan-style main house around a contemplative Zen garden, steps from Kyoto\'s temples and geisha districts.',
+                    amenities: ['Traditional onsen, indoor and outdoor', 'Tea ceremony pavilion with resident master', 'Kimono dressing service', 'Sake cellar'],
+                    dining: ['Kaiseki Kikunoi, seasonal haute cuisine', 'Sushi Sanctuary, omakase counter', 'Garden Lounge, rare Japanese whisky'],
+                    rooms: '25 machiya houses and suites with tatami rooms, shoji screens and hinoki cypress tubs.',
+                    signature: 'Essence of Kyoto: Fushimi Inari before the crowds, breakfast with a Buddhist monk and geisha entertainment in a historic ochaya.',
+                    images: ['https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&q=70', 'https://images.unsplash.com/photo-1669711671802-7efa7074bd3f?w=600&q=60', 'https://images.unsplash.com/photo-1723382056183-823d065ae8ed?w=600&q=60'],
+                    map: 'Higashiyama, Kyoto'
+                },
+                'The Highland Crown Scotland': {
+                    city: 'Scottish Highlands',
+                    tagline: 'A 1542 baronial castle above Loch Ness',
+                    description: 'A 58-room castle hotel with oak-panelled great halls, turrets and original tapestries, commanding views of Loch Ness and the Highlands from its hilltop.',
+                    amenities: ['Castle spa with heather and seaweed treatments', 'Whisky library of over 400 single malts', 'Falconry centre', 'Private ghillie for loch fishing'],
+                    dining: ['The Great Hall, Highland game and seafood', 'Whisky Room, fine dining with rare malts', 'The Cellar Bar, gastropub'],
+                    rooms: '58 rooms and suites with four-poster beds, stone fireplaces and turret rooms over the loch.',
+                    signature: 'Laird\'s Legacy: become Laird for a Day with a private piper, clan research, a whisky blending session and dinner in the Great Hall.',
+                    images: ['https://images.unsplash.com/photo-1633459502215-5b366e145e7c?w=1200&q=70', 'https://images.unsplash.com/photo-1713017059952-41271ea87e9c?w=600&q=60', 'https://images.unsplash.com/photo-1702675303021-896a006e5e97?w=600&q=60'],
+                    map: 'Loch Ness, Scotland'
+                },
+                'The Marrakech Riad Noir': {
+                    city: 'Marrakech',
+                    tagline: 'A 12-suite palace hidden in the medina',
+                    description: 'Behind unassuming walls, a courtyard palace of zellige tilework, carved cedar ceilings and bold modern art, steps from the Jemaa el-Fnaa square.',
+                    amenities: ['Rooftop pool with Atlas Mountain views', 'Traditional hammam with argan treatments', 'Cooking school with market tours', 'Vintage Mercedes transfers'],
+                    dining: ['Le Noir, contemporary Moroccan fusion', 'Courtyard Restaurant, traditional dishes', 'Rooftop Terrace, sunset cocktails and mezze'],
+                    rooms: '12 suites named after Moroccan spices, with tadelakt walls, four-poster beds and private terraces.',
+                    signature: 'Artisan\'s Path: private access to master craftsmen\'s workshops and a private dinner in the Saadian Tombs after closing.',
+                    images: ['https://images.unsplash.com/photo-1587974928442-77dc3e0dba72?w=1200&q=70', 'https://images.unsplash.com/photo-1570133435807-5feefeb2d196?w=600&q=60', 'https://images.unsplash.com/photo-1565020244281-fe53df7df170?w=600&q=60'],
+                    map: 'Medina, Marrakech'
+                }
+            };
+
+            const overlay = document.getElementById('tlOverlay');
+            const modal = document.getElementById('tlModal');
+            const live = document.getElementById('tlLive');
+
+            const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            const closeBtn = '<button class="tl-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
+            const badge = t => '<span class="tl-badge">' + esc(t) + '</span>';
+
+            function findHotel(name) {
+                if (!name) return null;
+                if (HOTELS[name]) return Object.assign({ name: name }, HOTELS[name]);
+                const q = String(name).toLowerCase();
+                for (const k in HOTELS) {
+                    if (k.toLowerCase().includes(q) || q.includes(k.toLowerCase()) || HOTELS[k].city.toLowerCase() === q) {
+                        return Object.assign({ name: k }, HOTELS[k]);
+                    }
+                }
+                return null;
+            }
+
+            function fmtDate(iso) {
+                if (!iso) return '';
+                const d = new Date(iso);
+                if (isNaN(d.getTime())) return iso;
+                return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+            }
+
+            function fmtMoney(n, cur) {
+                if (n == null || n === '') return '';
+                try { return new Intl.NumberFormat('en-GB', { style: 'currency', currency: cur || 'GBP', maximumFractionDigits: 0 }).format(n); }
+                catch (e) { return (cur || 'GBP') + ' ' + n; }
+            }
+
+            function open(html, extraClass) {
+                modal.className = 'tl-modal' + (extraClass ? ' ' + extraClass : '');
+                modal.innerHTML = closeBtn + html;
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                modal.querySelector('.tl-close').addEventListener('click', close);
+                modal.scrollTop = 0;
+            }
+
+            function close() {
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+            }
+
+            overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+            function showHotel(msg) {
+                const h = findHotel(msg.hotel) || findHotel(msg.city);
+                if (!h) return;
+                open(
+                    badge('Jeffrey is showing') +
+                    '<div class="tl-hotel-hero"><img src="' + h.images[0] + '" alt="' + esc(h.name) + '">' +
+                    '<div class="tl-hotel-title"><span class="eyebrow">' + esc(h.city) + '</span><h3>' + esc(h.name) + '</h3></div></div>' +
+                    '<div class="tl-hotel-body"><div>' +
+                    '<p class="tl-section-label">' + esc(h.tagline) + '</p><p>' + esc(h.description) + '</p>' +
+                    '<p class="tl-section-label">Dining</p><ul class="tl-list">' + h.dining.map(d => '<li>' + esc(d) + '</li>').join('') + '</ul>' +
+                    '<p class="tl-section-label">Rooms</p><p>' + esc(h.rooms) + '</p>' +
+                    '</div><div>' +
+                    '<div class="tl-gallery"><img src="' + h.images[1] + '" alt=""><img src="' + h.images[2] + '" alt=""></div>' +
+                    '<p class="tl-section-label">Amenities</p><div class="tl-chips">' + h.amenities.map(a => '<span class="tl-chip">' + esc(a) + '</span>').join('') + '</div>' +
+                    '<div class="tl-signature"><strong>Signature experience</strong>' + esc(h.signature) + '</div>' +
+                    '</div></div>'
+                );
+            }
+
+            function showBooking(msg) {
+                const b = msg.booking || {};
+                const spa = msg.kind === 'spa' || /^SPA/i.test(b.reference || '');
+                const status = String(b.status || 'confirmed');
+                const rows = spa ? [
+                    ['Hotel', b.hotel], ['Guest', b.guestName],
+                    ['Treatment', b.treatment], ['Date', fmtDate(b.date)],
+                    ['Time', b.time], ['Guests', b.people]
+                ] : [
+                    ['Hotel', b.hotel], ['Guest', b.guestName],
+                    ['Check-in', fmtDate(b.checkIn)], ['Check-out', fmtDate(b.checkOut)],
+                    ['Room', b.roomType ? b.roomType.charAt(0).toUpperCase() + b.roomType.slice(1) : ''],
+                    ['Guests', (b.guests || '') + (b.nights ? ' · ' + b.nights + ' night' + (b.nights == 1 ? '' : 's') : '')]
+                ];
+                open(
+                    badge('Jeffrey is showing') +
+                    '<div class="tl-booking-head"><span class="eyebrow">' + (spa ? 'Spa appointment' : 'Room reservation') + '</span>' +
+                    '<h3>' + (spa ? 'Your spa booking' : 'Your booking') + '</h3>' +
+                    '<div class="tl-ref">' + esc(b.reference) + '</div><br>' +
+                    '<span class="tl-status ' + (status === 'cancelled' ? 'cancelled' : '') + '">' + esc(status) + '</span></div>' +
+                    '<div class="tl-rows">' + rows.filter(r => r[1] !== undefined && r[1] !== '').map(r => '<div class="tl-row"><span>' + esc(r[0]) + '</span><strong>' + esc(r[1]) + '</strong></div>').join('') +
+                    (b.totalPrice != null ? '<div class="tl-total"><span class="tl-section-label" style="margin:0">Total</span><strong>' + esc(fmtMoney(b.totalPrice, b.currency)) + '</strong></div>' : '') +
+                    '</div>',
+                    'tl-booking'
+                );
+            }
+
+            function showRestaurants(msg) {
+                const h = findHotel(msg.hotel) || findHotel(msg.city);
+                const where = msg.map || (h && h.map) || msg.city || '';
+                const cuisine = msg.cuisine || 'restaurants';
+                const q = cuisine + ' near ' + where;
+                const src = 'https://www.google.com/maps/embed/v1/search?key=' + MAPS_KEY + '&q=' + encodeURIComponent(q) + '&zoom=15';
+                open(
+                    badge('Jeffrey is showing') +
+                    '<div class="tl-map-head"><span class="eyebrow">Near ' + esc(h ? h.name : where) + '</span><h3>' + esc(cuisine.charAt(0).toUpperCase() + cuisine.slice(1)) + '</h3></div>' +
+                    '<iframe src="' + src + '" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>',
+                    'tl-map'
+                );
+            }
+
+            function showComplaint(msg) {
+                const c = msg.complaint || {};
+                const cat = c.category ? c.category.charAt(0).toUpperCase() + c.category.slice(1) : 'Complaint';
+                const rows = [
+                    ['Hotel', c.hotel], ['Guest', c.guestName],
+                    ['Booking', c.bookingReference], ['Category', cat],
+                    ['Requested', c.desiredOutcome], ['Contact by', c.contactPreference]
+                ];
+                open(
+                    badge('Jeffrey has logged') +
+                    '<div class="tl-booking-head"><span class="eyebrow">Guest Relations</span>' +
+                    '<h3>We\'re sorry. This has been raised.</h3>' +
+                    '<div class="tl-ref">' + esc(c.reference) + '</div><br>' +
+                    '<span class="tl-status">' + esc(c.status || 'raised') + '</span></div>' +
+                    '<div class="tl-rows">' + rows.filter(r => r[1]).map(r => '<div class="tl-row"><span>' + esc(r[0]) + '</span><strong>' + esc(r[1]) + '</strong></div>').join('') +
+                    (c.description ? '<div class="tl-row" style="grid-column:1/-1"><span>What happened</span><p style="font-size:0.98rem;opacity:0.85;margin-top:0.2rem">' + esc(c.description) + '</p></div>' : '') +
+                    '<div class="tl-total" style="display:block"><p class="tl-section-label" style="margin:0 0 0.4rem">What happens next</p>' +
+                    '<p style="font-size:0.95rem;opacity:0.85">Our ' + esc(c.owner || 'Guest Relations team') + ' will review this and contact you within ' + esc(c.responseWithin || '2 working days') + '. Please quote the reference above.</p></div>' +
+                    '</div>',
+                    'tl-booking'
+                );
+            }
+
+            function showRooms(msg) {
+                const rooms = Array.isArray(msg.rooms) ? msg.rooms : [];
+                if (!rooms.length) return;
+                const featuredIdx = rooms.length > 2 ? rooms.length - 2 : rooms.length - 1;
+                const cards = rooms.map((r, i) => {
+                    const featured = i === featuredIdx;
+                    return '<div class="tl-room' + (featured ? ' featured' : '') + '">' +
+                        (featured ? '<span class="tl-room-best">Most popular</span>' : '') +
+                        '<span class="tl-room-tier">' + esc(r.key || '') + '</span>' +
+                        '<h4>' + esc(r.name) + '</h4>' +
+                        '<div class="tl-room-rate">' + esc(fmtMoney(r.rate, r.currency)) + '<small>per night</small></div>' +
+                        '<div class="tl-room-meta"><span>' + esc(r.size || '') + '</span><span>Sleeps ' + esc(r.sleeps || '') + '</span><span>' + esc(r.bed || '') + '</span></div>' +
+                        '<ul>' + (r.features || []).map(f => '<li>' + esc(f) + '</li>').join('') + '</ul>' +
+                        '</div>';
+                }).join('');
+                open(
+                    badge('Jeffrey is showing') +
+                    '<div class="tl-rooms-head"><span class="eyebrow">' + esc(msg.hotel || '') + '</span><h3>Choose your room</h3></div>' +
+                    '<div class="tl-rooms-grid">' + cards + '</div>'
+                );
+            }
+
+            function handle(msg) {
+                switch (msg.type) {
+                    case 'rooms': return showRooms(msg);
+                    case 'hotel': return showHotel(msg);
+                    case 'booking': return showBooking(msg);
+                    case 'complaint': return showComplaint(msg);
+                    case 'restaurants': return showRestaurants(msg);
+                    case 'close': return close();
+                    default: return;
+                }
+            }
+
+            // Subscribe to ntfy via server-sent events, with reconnect.
+            let es;
+            function connect() {
+                try { if (es) es.close(); } catch (e) {}
+                es = new EventSource('https://ntfy.sh/' + TOPIC + '/sse');
+                es.onopen = () => live.classList.add('on');
+                es.onerror = () => { live.classList.remove('on'); };
+                es.onmessage = ev => {
+                    try {
+                        const env = JSON.parse(ev.data);
+                        if (env.event !== 'message') return;
+                        const msg = JSON.parse(env.message);
+                        handle(msg);
+                    } catch (e) { /* ignore non-JSON messages */ }
+                };
+            }
+            connect();
+            setInterval(() => { if (es && es.readyState === 2) connect(); }, 5000);
+
+            // Manual test hook: tlDemo.hotel('Paris'), tlDemo.restaurants('Chinese','London'), tlDemo.booking()
+            window.tlDemo = {
+                hotel: h => showHotel({ hotel: h }),
+                restaurants: (c, h) => showRestaurants({ cuisine: c, hotel: h }),
+                booking: b => showBooking({ kind: 'room', booking: b || { reference: 'TL482917', status: 'confirmed', hotel: 'Le Marais Residences', guestName: 'Sarah Harris', checkIn: '2026-11-14', checkOut: '2026-11-17', nights: 3, guests: 2, roomType: 'suite', totalPrice: 2850, currency: 'GBP' } }),
+                rooms: () => showRooms({ hotel: 'The Palm Dubai', rooms: [
+                    { key: 'standard', name: 'Palm Room', rate: 350, currency: 'GBP', size: '32 sqm', sleeps: 2, bed: 'King or twin', features: ['Rainfall shower', 'Smart room controls', 'Nespresso machine', 'Daily housekeeping'] },
+                    { key: 'deluxe', name: 'Deluxe Sea View', rate: 520, currency: 'GBP', size: '45 sqm', sleeps: 2, bed: 'King', features: ['Everything in Standard', 'Premium view', 'Separate seating area', 'Bath and rain shower', 'Pillow menu', 'Late checkout'] },
+                    { key: 'suite', name: 'Skyline Suite', rate: 950, currency: 'GBP', size: '75 sqm', sleeps: 3, bed: 'King plus sofa bed', features: ['Everything in Deluxe', 'Separate living room', 'Private terrace or balcony', 'Butler service', 'Lounge access with breakfast', 'Airport transfer'] },
+                    { key: 'villa', name: 'Royal Beach Villa', rate: 1800, currency: 'GBP', size: '150 sqm plus', sleeps: 4, bed: 'Two bedrooms', features: ['Everything in Suite', 'Private pool', 'Dedicated villa host', 'Outdoor dining area', 'In-villa spa treatments', 'Private check-in'] }
+                ] }),
+                complaint: c => showComplaint({ complaint: c || { reference: 'CR24176', status: 'raised', hotel: 'The Palm Dubai', guestName: 'Sarah Harris', category: 'cleanliness', description: 'Room not cleaned for the first two nights; hair in the bath and bins not emptied. Fixed on day three after two complaints.', desiredOutcome: 'Partial refund', contactPreference: 'Email', owner: 'Guest Relations team', responseWithin: '2 working days' } }),
+                close: close
+            };
+        })();
+    </script>
+
+    <!-- ============================================================ -->
+    <!-- Cognigy WebRTC click-to-call widget (Jeffrey, voice)          -->
+    <!-- ============================================================ -->
+    <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+    <script>
+        addEventListener("load", (event) => {
+            if (window.initWebRTCWidget) {
+                window.initWebRTCWidget("https://endpoint-trial.cognigy.ai/33a259623e69ec87558deb41784e644bcc70b146823a008c6824646f73c69e09");
             }
         });
+    </script>
 
-        // Carousel functionality
-        let currentSlide = 0;
-        const carousel = document.getElementById('carousel');
-        const slides = document.querySelectorAll('.carousel-item');
-        const dotsContainer = document.getElementById('dots');
+    <!-- ============================================================ -->
+    <!-- Page scripts                                                  -->
+    <!-- ============================================================ -->
+    <script>
+        (function () {
+            // ---- Header: solid on scroll ------------------------------
+            const header = document.getElementById('header');
+            const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
 
-        // Create dots
-        slides.forEach((_, i) => {
-            const dot = document.createElement('span');
-            dot.className = 'dot';
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        });
-
-        const dots = document.querySelectorAll('.dot');
-
-        function updateCarousel() {
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
+            // ---- Mobile navigation ------------------------------------
+            const navToggle = document.getElementById('navToggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const closeNav = () => {
+                mobileNav.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            };
+            navToggle.addEventListener('click', () => {
+                const open = !mobileNav.classList.contains('open');
+                mobileNav.classList.toggle('open', open);
+                navToggle.setAttribute('aria-expanded', String(open));
+                document.body.style.overflow = open ? 'hidden' : '';
             });
-        }
+            mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 
-        function moveCarousel(direction) {
-            currentSlide += direction;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            if (currentSlide >= slides.length) currentSlide = 0;
-            updateCarousel();
-        }
+            // ---- Carousel ---------------------------------------------
+            const carousel = document.getElementById('carousel');
+            const wrap = document.getElementById('carouselWrap');
+            const slides = carousel.querySelectorAll('.carousel-item');
+            const dotsContainer = document.getElementById('dots');
+            let current = 0;
+            let timer;
 
-        function goToSlide(n) {
-            currentSlide = n;
-            updateCarousel();
-        }
-
-        // Auto-advance carousel
-        setInterval(() => {
-            moveCarousel(1);
-        }, 5000);
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            slides.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.type = 'button';
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-label', 'Go to suite ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
             });
-        });
+            const dots = dotsContainer.querySelectorAll('.dot');
 
-        // Feature cards hover animation
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+            function render() {
+                carousel.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function goTo(n) {
+                current = (n + slides.length) % slides.length;
+                render();
+                restart();
+            }
+
+            function restart() {
+                clearInterval(timer);
+                timer = setInterval(() => goTo(current + 1), 6000);
+            }
+
+            document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+            document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+            wrap.addEventListener('mouseenter', () => clearInterval(timer));
+            wrap.addEventListener('mouseleave', restart);
+            document.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft') goTo(current - 1);
+                if (e.key === 'ArrowRight') goTo(current + 1);
             });
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-10px)';
+
+            // Touch swipe
+            let startX = null;
+            wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+            wrap.addEventListener('touchend', e => {
+                if (startX === null) return;
+                const dx = e.changedTouches[0].clientX - startX;
+                if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+                startX = null;
             });
-        });
+
+            restart();
+
+            // ---- Scroll reveal ----------------------------------------
+            const revealEls = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                revealEls.forEach(el => io.observe(el));
+            } else {
+                revealEls.forEach(el => el.classList.add('in'));
+            }
+        })();
     </script>
 </body>
 </html>
